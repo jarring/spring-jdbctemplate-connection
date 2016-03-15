@@ -1,0 +1,43 @@
+
+apply plugin: "java"
+apply plugin: "war"
+apply plugin: "eclipse-wtp"
+
+repositories {
+	maven  { url "http://repo.spring.io/release/" }
+	mavenCentral()
+}
+
+dependencies {
+	compile    "org.springframework:spring-aop:4.2.4.RELEASE";
+	compile    "org.springframework:spring-aspects:4.2.4.RELEASE";
+	compile    "org.springframework:spring-beans:4.2.4.RELEASE";
+	compile    "org.springframework:spring-context:4.2.4.RELEASE";
+	compile    "org.springframework:spring-core:4.2.4.RELEASE";
+	compile    "org.springframework:spring-expression:4.2.4.RELEASE";
+	compile    "org.springframework:spring-jdbc:4.2.4.RELEASE";
+	compile    "org.springframework:spring-orm:4.2.4.RELEASE";
+	compile    "org.springframework:spring-oxm:4.2.4.RELEASE";
+	compile    "org.springframework:spring-tx:4.2.4.RELEASE";
+
+	compile    "org.hsqldb:hsqldb:2.3.3";
+	compile    "org.apache.commons:commons-dbcp2:2.1.1"
+	compile    "mysql:mysql-connector-java:5.1.38"
+
+	testCompile    "org.springframework:spring-test:4.2.4.RELEASE";
+	testCompile    "junit:junit:4.12";
+}
+
+test {
+
+	// explicitly include or exclude tests
+	include '**'
+
+	// show standard out and standard error of the test JVM(s) on the console
+	testLogging.showStandardStreams = true
+
+	// listen to events in the test execution lifecycle
+	beforeTest { descriptor ->
+		logger.lifecycle("Running test: " + descriptor)
+	}
+}
